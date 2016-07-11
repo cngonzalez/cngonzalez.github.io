@@ -3,8 +3,6 @@ layout: post
 title: Printf and Sprintf
 ---
 
-Printf and sprintf
-
 Before creating this gem, I had limited experience with Ruby’s <i>print</i> function. I didn’t see much use for it – I love the automatic single-space newline in <i>puts</i> (and I use it extensively in the CLI!)
 
 But when I found myself negotiating with displaying very specifically formatted information, I had to change my tune. Nokogiri saves text fields as strings automatically, which I turned into floats easily enough. But when it came time to display those prices again, I ran into an issue – “$30.0” technically makes sense, but it’s incorrect and, worse, looks sloppy.
