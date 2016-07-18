@@ -76,15 +76,15 @@ The good news is that Rack is, among other things, designed to streamlined that 
 We can think of that environment as a server. There's a bunch of stuff on that server that we would need to deal with if it wasn't for Rack. A few of them are:<br>
 
 <ul>
-REQUEST_METHOD: The HTTP verb of the request. This is required.
-PATH_INFO: The request URL path, relative to the root of the application.
-QUERY_STRING: Anything that followed ? in the request URL string.
-SERVER_NAME and SERVER_PORT: The server's address and port.
-rack.version: The rack version in use.
-rack.url_scheme: is it http or https?
-rack.input: an IO-like object that contains the raw HTTP POST data.
-rack.errors: an object that response to puts, write, and flush.
-rack.session: A key value store for storing request session data.
+REQUEST_METHOD: The HTTP verb of the request. This is required.<br>
+PATH_INFO: The request URL path, relative to the root of the application.<br>
+QUERY_STRING: Anything that followed ? in the request URL string.<br>
+SERVER_NAME and SERVER_PORT: The server's address and port.<br>
+rack.version: The rack version in use.<br>
+rack.url_scheme: is it http or https?<br>
+rack.input: an IO-like object that contains the raw HTTP POST data.<br>
+rack.errors: an object that response to puts, write, and flush.<br>
+rack.session: A key value store for storing request session data.<br>
 rack.logger: An object that can log interfaces. It should implement info, debug, warn, error, and fatal methods.
 </ul>
 
