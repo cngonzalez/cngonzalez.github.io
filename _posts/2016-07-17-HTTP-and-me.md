@@ -35,17 +35,30 @@ Let's start with the basic URI module. This comes in the Ruby library and deals 
 
 Needless to say, that's a little primitive. It's certainly useful -- locations tell you a lot about what's happening. URI is also vital as part of HTTP -- it's one of two required parts, the HEADER.<br>
 
-<!-- terminal output here  -->
+```
+2.2.3 :004 >   uri = URI("http://www.ebay.com/sch/i.html?_from=R40&_trksid=p2060353.m570.l1313.TR0.TRC0.H0.Xmy+search.TRS0&_nkw=my+search&_sacat=0")
+ => #<URI::HTTP http://www.ebay.com/sch/i.html?_from=R40&_trksid=p2060353.m570.l1313.TR0.TRC0.H0.Xmy+search.TRS0&_nkw=my+search&_sacat=0>
+2.2.3 :005 > uri.scheme
+ => "http"
+2.2.3 :006 > uri.host
+ => "www.ebay.com"
+2.2.3 :007 > uri.path
+ => "/sch/i.html"
+2.2.3 :008 > uri.query
+ => "_from=R40&_trksid=p2060353.m570.l1313.TR0.TRC0.H0.Xmy+search.TRS0&_nkw=my+search&_sacat=0"
+2.2.3 :009 > uri.fragment
+ => nil
 
+```
 URI is required to build a Ruby NET::HTTP object, which gets a little more interesting. HTTP objects can easily become a client that surfs the web just like we do.<br>
 
 {% highlight ruby %}
  uri = URI('http://example.com/index.html')
 
 Net::HTTP.start(uri.host, uri.port) do |http|
-  request = Net::HTTP::Get.new uri
+  my_get_request = Net::HTTP::Get.new uri
 
-  response = http.request request
+  server_response = http.request request
 end
 {% endhighlight %}
 
@@ -57,11 +70,11 @@ Net::HTTP.start #the HTTP.start method opens up a TCP/IP connection, just like a
 
 (uri.host, uri.port) #to do so, it calls on that host and port information
 
- do |http| #the block format is to keep using that same connection session
+ do |http| #the block format is to keep using that same connection session for this bit of code
 
-request = Net::HTTP::Get.new uri # we're defining a Get request from that location
+  my_get_request = Net::HTTP::Get.new uri # we're defining a Get request from that location
 
-  response = http.request request # We're now making that specific request, and storing it in an HTTP response object
+  server_response = http.request request # We're now making that specific request, and storing it in an HTTP response object
 end
 {% endhighlight %}
 
@@ -70,6 +83,18 @@ You can read this just like a html file if you use HTML's body method (e.g., "re
 The big string that response.body returns should look familiar to you, especially if you've done any scraping. A tool like Nokogiri just breaks up that string into hash-like chunks via a parsing algorithm.<br>
 
 An environmental tool like Rack (and Sinatra, which inherits from a number of Rack classes, and Rails which ultimately inherits from THAT) is designed to act like the opposite side of this transaction. So it will first RECEIVE the request and parse the data it gets from it, and then it will RETURN some data. As such, methods using these environments don't necessarily look a lot like HTTP methods, even though it's the same protocol!<br>
+
+{% highlight ruby %}
+class Request #the code behind a Rack request
+
+    def initialize(env) #the environment here is the env of the REQUEST (typically just a head)
+
+      @params = nil
+
+      super(env) #this is inheriting from the main Rack module (which specifies and freezes a bunch of Net::HTTP verbs)
+
+    end
+{% endhighlight %}
 
 The good news is that Rack is, among other things, designed to streamlined that HTTP request/response process we've just gone over. It takes all that stuff we associate with URI and the TCP/IP handling of the HTTP object by creating an environment and creating objects based on that environment.<br>
 
@@ -89,5 +114,19 @@ rack.logger: An object that can log interfaces. It should implement info, debug,
 </ul>
 
 (psst... this has a lot to do with satisfying HTTP requirements!) Rack and its babies and grandbabies lets you pass all that stuff to an initializing object in Hash form, turning it into an Object with variables that you can manipulate. You can send back another object, which Rack will turn back into HTTP-compliant data.<br>
+
+Sinatra is fairly similar in this sense.
+
+{% highlight ruby %}
+
+def get(path, opts = {}, &block)
+      conditions = @conditions.dup
+      route('GET', path, opts, &block)
+
+      @conditions = conditions
+      route('HEAD', path, opts, &block)
+    end
+{% endhighlight %}
+
 
 In short, then, HTTP gives us a sense of structure. Ruby has a bunch of useful stuff that interprets and rearranges that structure into something that's easy and pleasing to deal with, before sending it back as big ungainly (but STRUCTURED) chunks of data!
