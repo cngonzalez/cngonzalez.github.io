@@ -1,16 +1,16 @@
 ---
 layout: post
-title: Trie
+title: Trie vs. Murmurhash
 ---
 
 A trend I see in blogs and Stack Overflows and all the rest is explaining CS concepts to those who might have rushed past a CS background -- sorting algorithms, traditional CS logic problems, etc. These concepts have their practical applications, but modern-day coding magic sometimes hide them from view. Tries are no exception; until a few weeks ago, I thought they were a side effect of bad English-language instruction.
 
-![](http://abcnews.go.com/Technology/number-trees-earth-surprise/story?id=33512507)
+![](https://upload.wikimedia.org/wikipedia/commons/e/eb/Ash_Tree_-_geograph.org.uk_-_590710.jpg)
 *I got to states in the National Spelling Bee once. I lost on "speleology". Now I'll always know how to spell speleology. Also, in finding this picture, I learned there are 3.04 trillion trees on Earth -- about 400 per human. We cut down about 15 billion a year which is a bummer.*
 
 Tries are a type of data tree, but not all trees are tries. You've probably come across basic binary trees before. We've covered them in discussions of search functions -- there's a root, branches one travels down, and nodes that have at most two children. They're recursive and boolean, two types of reasoning that computers just love (and why do computers love these things? Binary, duh)
 
-![](https://en.wikipedia.org/wiki/Binary_tree#/media/File:Binary_tree.svg)
+![](https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Binary_tree.svg/192px-Binary_tree.svg.png)
 *This is Wikipedia's default image for its binary tree article, and it's not balanced and not sorted and it drives me crazy that this is the case.*
 
 Hash tables are considered to be superior to trees performance-wise in many cases. Part of the reason for this is that the performance of hash tables don't usually depend on the size of the hash (since each key-value lookup performs independently) but there's also always the chance that hash collisions can happen, or that our data is not particularly discrete, and thus limiting ourselves to one key-value pair can be quite limiting if we're not sure what we're initially looking for.
@@ -79,7 +79,7 @@ uint32_t murmur3_32(const char *key, uint32_t len, uint32_t seed) {
 	return hash;
 }
 ```
-Murmurhash guarantees that there will be no data collision for bytes under 4 characters (because it offers that many possibilities of uniqueness). A typical ASCII character has 1 byte, and the highest number of bytes allowed by UTF-8 is 4 bytes.
+Murmurhash guarantees that there will be no data collision for bytes under 4 characters (because it offers that many possibilities of uniqueness). A typical ASCII character has 1 byte, and the highest number of bytes allowed by UTF-8 is 4 bytes. It's also worth noting that about 40% of hashes ever created in Ruby will never use more than one bucket for its data, since many people will use small hashes in their applications.
 
 This means that you're liable to run into data collisions above that, and many words tend to be above four characters. This is where the speed of tries shines -- while the initial lookup time cost of hash functions are, optimally, smaller, remember that a trie is looking at smaller and smaller collections of characters, offering the possibility of greater speed and precision.
 
