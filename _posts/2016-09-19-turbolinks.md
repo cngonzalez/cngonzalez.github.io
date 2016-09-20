@@ -7,11 +7,9 @@ Turbolinks, as far as I can tell, was born in 2012, like so many other things: H
 
 Turbolinks is arguably not as bad as any of the above, but, like the above, it is something to be endured. Necessity is the mother of invention, and Turbolinks' necessity came about from the emergence of single-page apps. SPAs are still something many design philosophies aspire to, and the desire to create or emulate them came about for a number of reasons:
 
-<ul>
 * **Mobile-first development.** A page refresh takes forever on a phone. Better to have the user wait and sit for an initial load and never again.
 * **Applications requiring persistent states.** As people began to work almost exclusively online, few had patience for not being able to navigate away from an email, for example, or return to a dedicated shopping cart page when comparing products.
 * **Simple impatience.** Those tiny spaces of white page loads add up, especially when you're consuming a great deal of content online - reading pages of someone's blog or trying to find a recipe becomes a chore, even if the initial millisecond load time seems insignificant at first.
-</ul>
 
 A number of solutions to the SPA aspiration came about around this time -- hacks to HTML4 that would eventually become HTML5, frameworks like Ember and Angular (React is a special case, since it decided to drop even pretending to be a model or controller framework), and Bootstrap 2. It seems like Rails developers were unwilling to be late to this particular party, so: enter Turbolinks.
 
