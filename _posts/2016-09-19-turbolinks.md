@@ -30,7 +30,7 @@ It may be easier to think about Turbolinks if we look at the step-by-step proces
 
 So if my browser address changed, I must have loaded up a brand new page, right?
 
-Yes and no. In 2014, HTML5 introduced a method with the very Javascript-y name of pushState. PushState MIMICS the changing of a DOM without actually doing it -- it gives apps the ability to rewrite the address bar even within the same DOM load.
+Yes and no. In 2014, HTML5 introduced a method with the very Javascript-y name of pushState. PushState <i>mimics</i> the changing of a DOM without actually doing it -- it gives apps the ability to rewrite the address bar even within the same DOM load.
 
 (Why would anyone want to do this? Well, because in a perfect world, URLs should designate unique resources. While it's technically possible to navigate a big CRUDy website with just the URL "www.mywebsite.com" persisting through every page, it's a bit jarring. It also stops me from sending URLs of my hilarious cat gifs to my friends, and will make me extremely confused and scared to use my back button.
 
@@ -44,6 +44,6 @@ Turbolinks. Turbolinks happened. If you, like me, vaguely remember Javascript an
 
 So I could use all kinds of convoluted workarounds, or, more commonly, just delete that pesky little "require turbolinks" line in my manifest (I have done this multiple times now). But there are some defenses for Turbolinks. Sometimes, <a href="http://blog.steveklabnik.com/posts/2012-09-27-seriously--numbers--use-them-">it IS faster. </a> in the interest of optimism, here's some solutions I found to help you live in peace with Turbolinks:
 
-1. Use its native methods instead of JQuery's $(document).ready(). You can find a list of these here: https://github.com/turbolinks/turbolinks-classic#events. They include such useful methods as page:change and page:update.
+1. Use its native methods instead of JQuery's $(document).ready(). You can find a list of these <a href="https://github.com/turbolinks/turbolinks-classic#events">here</a>. They include such useful methods as page:change and page:update.
 
 2. Ditch RESTful redirects. One of the issues I've come across is trying to patch JQuery methods into an app that was already fully RESTful in a Rails way. JQuery would demand you just use Javascript to update your view. If you go in with that expectation -- rather than trying to get a perfect page upon redirect -- you'll run into fewer errors.
