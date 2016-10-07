@@ -11,7 +11,7 @@ Javascript is the Wild West, comparatively. Frameworks are constantly changing. 
 
 But what IS a module? Like a Ruby file, it's a miserable pile of secrets.
 
-![https://s-media-cache-ak0.pinimg.com/originals/6b/1b/12/6b1b12642d86a8283a6adeb5c7ae705a.jpg]
+<img src="https://s-media-cache-ak0.pinimg.com/originals/6b/1b/12/6b1b12642d86a8283a6adeb5c7ae705a.jpg" />
 
 Asking what a module is like asking how long a piece of string is. It's just some code, and the functionality and purpose of your module should be clear (like -- there's a clear reason why a Ruby class is self-contained, and why a Ruby helper has the things that it has). As web apps become larger, they need more stuff. Keeping all of that stuff and loading it via script tags on HTML pages, and finding it later and maintaining it, all becomes a nightmare.
 
@@ -27,29 +27,29 @@ Generally, there are several ways of interpreting module structure, even within 
 
 These are very general and abstract summaries of JavaScript design patterns, but they'll hopefully help provide some introduction to the principles that inform modern module management. All of these pertain to the old issue of having your JS compiled in one big file, which is rarely the case anymore. But the theory behind them is still in play.
 
-##CommonJS##
+<h2>CommonJS</h2>
 
 Much of what I've encountered in the Learn track is based on CommonJS (because most of the labs use NPM as their bundler, which is a Node product, which is based on CommonJS). A CommonJS file will have `module.exports` on the bottom (or, now, `export default`), and possibly require other modules (which have also been exported to the module) via an `import` or `require` function.
 
 It's very neat and easy-to-understand (we've required and exported things enough to know that code can read other code), but it does have some drawbacks. It takes a server-first approach, which means that most of the work is being done on the server and then being served to the client. It synchronously loads modules to accomplish this, which can be less-than-ideal; most browsers will block any activity from happening until the LAST module is loaded.
 
-##AMD##
+<h2>AMD</h2>
 
-![http://i.imgur.com/YOfDH51.jpg]
+<img src="http://i.imgur.com/YOfDH51.jpg />
 
 If you've gotta go fast, then AMD might be the framework for you. It uses `define` as a keyword for naming its dependencies, and allows all kinds of things to be modules -- strings, numbers, JSON, etc. CommonJS only allows objects to be modules, as far as I know. Unfortunately, server-oriented features like io and filesystem don't like AMD very much, which means that you are somewhat limited in your options in you want to read and write files, upload things, etc.
 
-##Others##
+<h2>Others</h2>
 
 Some frameworks like UMD try to combine AMD and CommonJS. I haven't heard much about it, but good luck to them.
 
-##Plain old vanilla JS##
+<h2>Plain old vanilla JS</h2>
 
 Yay! It's 2016 and ECMA2015 is here??? I mentioned earlier that JavaScript just added native support for modules. It's true! And it looks a lot like CommonJS! The main difference is that ES6 imports live read-only versions of modules -- CommonJS makes a copy of the module and loads THAT.
 
 Anyway, that's how modules are imported and exported. So why do we need to talk about anything else? Why do Webpack and Browserify exist?
 
-#Bundling#
+<h1>Bundling</h1>
 
 Like Ruby files, all of my modules are living in different files for my own sanity. Also for my own sanity, let's say I, like most devs, am now depending on some external library (in my real-life case, this is currently React, but even JQuery counts here). And if I want my page to work right, I want to load all my stuff. So I write `<script src="MyStuff.js"></script>` about a dozen times.
 
@@ -61,11 +61,11 @@ Loading modules one by one is slow. So now common practice is to put it all toge
 
 Even if they're using Internet Explorer.
 
-![https://i.imgflip.com/ti60l.jpg]
+<img src="https://i.imgflip.com/ti60l.jpg" />
 
 Browserify and AMD bundlers pretty do what I said above -- you run a command and everything ends up for you in bundle.js or similar. Webpack is a little different.
 
-##Webpack##
+<h2>Webpack</h2>
 
 Webpack's big difference is 'code splitting' -- it can run code in chunks, as can be seen by its config file.
 
