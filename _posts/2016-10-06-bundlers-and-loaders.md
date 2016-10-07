@@ -35,7 +35,7 @@ It's very neat and easy-to-understand (we've required and exported things enough
 
 <h2>AMD</h2>
 
-<img src="http://i.imgur.com/YOfDH51.jpg />
+<img src="http://i.imgur.com/YOfDH51.jpg" />
 
 If you've gotta go fast, then AMD might be the framework for you. It uses `define` as a keyword for naming its dependencies, and allows all kinds of things to be modules -- strings, numbers, JSON, etc. CommonJS only allows objects to be modules, as far as I know. Unfortunately, server-oriented features like io and filesystem don't like AMD very much, which means that you are somewhat limited in your options in you want to read and write files, upload things, etc.
 
