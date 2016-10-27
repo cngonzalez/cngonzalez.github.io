@@ -18,10 +18,10 @@ Asking what a module is like asking how long a piece of string is. It's just som
 There are other, more Javascript-y reasons for separating your concerns, too -- if you want to avoid conflicts between variable names, if you want faster load times, if you want to ensure some listener is NEVER triggered on a certain page, if you want some element to be loaded everywhere without constantly rewriting the element, and so on.
 
 Generally, there are several ways of interpreting module structure, even within a single JS page. You could use:
-* **Anonymous closures**, which hide variables from the global environment by creating and executing things within an anonymous function.
-* **Global import**, popularized by libraries like JQuery, where there are tons of variables within the global namespace, but they're rarely altered on a global scale -- only within local functions. By the addition of the `import` and `export` functions in ES6, it's easy to see that this is a popular approach.
-* **Pseudo-classes**, which borrow object orientation from other languages, in attempts to create objects that can't be altered except by certain methods. The `class` function was also added in ES6, because of how widely-spread the Object.prototype way of creating classes had been.
-* **Nested functions**, so that you can make a hierarchy of functions, dictating which has what kind of access to namespaces.
+* Anonymous closures, which hide variables from the global environment by creating and executing things within an anonymous function.
+* Global import, popularized by libraries like JQuery, where there are tons of variables within the global namespace, but they're rarely altered on a global scale -- only within local functions. By the addition of the `import` and `export` functions in ES6, it's easy to see that this is a popular approach.
+* Pseudo-classes, which borrow object orientation from other languages, in attempts to create objects that can't be altered except by certain methods. The `class` function was also added in ES6, because of how widely-spread the Object.prototype way of creating classes had been.
+* Nested functions, so that you can make a hierarchy of functions, dictating which has what kind of access to namespaces.
 
 (If I had to hazard a guess, I'd say that, architecture-wise, AngularJS falls somewhere between anonymous closure and global import, while React lives pretty firmly in OO/class territory.)
 
